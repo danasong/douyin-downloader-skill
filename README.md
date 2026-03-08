@@ -101,3 +101,16 @@ This repository is released under a **non-commercial license**. You may view, st
 本仓库采用**非商业授权协议**。你可以查看、学习、修改仓库内容，用于个人或内部用途，但**禁止商用**。
 
 See [LICENSE](./LICENSE) for the full text.
+
+---
+
+## Questions / 问题咨询
+
+If you have questions, feedback, or want to discuss usage, you can join the community group by scanning the QR code below.
+
+如果你在使用过程中遇到问题、想反馈建议，或希望交流用法，可以扫描下方二维码加入交流群。
+
+![WeChat Group QR / 微信群二维码](./assets/wechat-group-qr.jpg)
+
+> The QR code may expire and should be refreshed in future updates.  
+> 二维码可能会过期，后续可通过仓库更新替换最新版。
