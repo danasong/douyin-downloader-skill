@@ -170,15 +170,101 @@ This skill should not stop at “download succeeded”. It should treat the down
 
 这个 skill 不应只停留在“下载成功”，而应把下载视为更大工作流中的一个节点。
 
+### Decision Flow After Receiving a Douyin Link / 收到抖音链接后的决策流程
+
+When a user sends a Douyin link, the assistant should follow this sequence instead of jumping straight into download.
+
+当用户发来抖音链接时，助手不应一上来就直接下载，而应按以下顺序判断：
+
+#### Step 1 / 第一步：先确认用户意图
+Ask or infer what the user actually wants:
+- download the video / 下载视频
+- parse the content / 解析内容
+- analyze and learn from the content / 分析学习内容
+- do all of the above / 全部都做
+
+优先确认或判断用户真正要的是：
+- 下载视频
+- 解析内容
+- 分析学习
+- 还是全部都做
+
+Recommended quick reply style:
+
+```text
+收到抖音链接后，可优先确认：
+1. 是否下载？
+2. 是否解析内容？
+3. 是否分析学习？
+```
+
+#### Step 2 / 第二步：如果用户要下载
+If the user clearly wants download:
+1. invoke the private local downloader script
+2. return local file path + metadata
+3. ask whether follow-up processing is needed
+
+如果用户明确要下载：
+1. 调用私有本地下载脚本
+2. 返回本地路径 + 元信息
+3. 再询问是否需要后续处理
+
+#### Step 3 / 第三步：如果用户要解析
+If the user wants parsing instead of direct download:
+- extract title, author, video ID, topic, and visible page text when possible
+- summarize what the content is about
+- identify whether it points to a tool, project, workflow, or opinion
+
+如果用户要解析：
+- 提取标题、作者、视频 ID、主题、页面可见文本
+- 总结视频内容在讲什么
+- 识别它是在介绍工具、项目、流程还是观点
+
+#### Step 4 / 第四步：如果用户要“分析学习”
+If the user wants learning or analysis:
+- summarize the key idea
+- explain the real value behind the content
+- distinguish marketing language from actual engineering value
+- suggest how it can be adapted into the user's own workflow or skill system
+
+如果用户要“分析学习”：
+- 提炼核心观点
+- 分析真正价值点
+- 区分宣传话术和实际工程价值
+- 给出如何接入用户自身工作流 / skill 体系的建议
+
+#### Step 5 / 第五步：如果用户没说清楚
+If the user only sends a link and the intent is unclear:
+- do not assume download immediately
+- ask a short clarification question first
+- default clarification options: download / parse / analyze
+
+如果用户只是发了链接但没说明需求：
+- 不要默认立刻下载
+- 优先用一句短问句澄清
+- 默认澄清选项：下载 / 解析 / 分析学习
+
+Recommended clarification format:
+
+```text
+这条抖音你想让我：
+1. 直接下载
+2. 先解析内容
+3. 做分析学习
+4. 全部处理
+```
+
 ### Planning Layer / 规划层
 
 When a Douyin link is received, the skill should think in this order:
 
-1. Is the user only asking for the raw video file?  
+1. What does the user really want first: download, parse, analyze, or all?  
+   用户第一诉求到底是下载、解析、分析，还是全都要？
+2. Is the user only asking for the raw video file?  
    用户是不是只要原视频文件？
-2. Does the user likely want follow-up processing?  
+3. Does the user likely want follow-up processing?  
    用户是否大概率还需要后处理？
-3. Should the result be returned as local file only, or also prepared for downstream workflows?  
+4. Should the result be returned as local file only, or also prepared for downstream workflows?  
    结果是否只需本地交付，还是需要为后续流程做准备？
 
 ### Delivery Layer / 交付层
